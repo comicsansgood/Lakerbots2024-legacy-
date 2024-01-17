@@ -12,13 +12,14 @@ public class LauncherSubsystem extends SubsystemBase{
     public CANSparkFlex launcherRightMotor;
 
     public LauncherSubsystem(){ //yeah this probably does something important
-        launcherLeftMotor = new CANSparkFlex(3, MotorType.kBrushless);
-        launcherRightMotor = new CANSparkFlex(2, MotorType.kBrushless);
-        launcherLeftMotor.setInverted(true);
+        launcherLeftMotor = new CANSparkFlex(2, MotorType.kBrushless);
+        launcherRightMotor = new CANSparkFlex(3, MotorType.kBrushless);
+        launcherLeftMotor.setInverted(false);
+        launcherRightMotor.setInverted(true);
     }
-    public void launcerGo(){
-        launcherLeftMotor.set(.3);
-        launcherRightMotor.set(.7);
+    public void launcherGo(){
+        launcherLeftMotor.set(.8);
+        launcherRightMotor.set(.5);
     }
 
 

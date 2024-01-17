@@ -1,11 +1,16 @@
-/*package frc.robot.subsystems;
+package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants;
 import java.io.File;
 import edu.wpi.first.wpilibj.Filesystem;
+import swervelib.parser.SwerveControllerConfiguration;
+import swervelib.parser.SwerveDriveConfiguration;
 import swervelib.parser.SwerveParser;
+import swervelib.SwerveController;
 import swervelib.SwerveDrive;
+import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
@@ -13,12 +18,19 @@ import edu.wpi.first.math.util.Units;
 
 
 public class SwerveSubsystem extends SubsystemBase {
+  private  SwerveDrive swerveDrive;
   
   double maximumSpeed = Units.feetToMeters(4.5);
   File swerveJsonDirectory = new File(Filesystem.getDeployDirectory(),"swerve");
 
-  public SwerveSubsystem() {
-    SwerveDrive swerveDrive = new SwerveParser(directory).createSwerveDrive(maximumSpeed);
+  public SwerveSubsystem(File dir){
+    
+    try{
+      SwerveDrive swerveDrive = new SwerveParser(dir).createSwerveDrive(maximumSpeed);
+    }catch(Exception e){
+      throw new RuntimeException(e);
+
+    }
   }
 
   public SwerveSubsystem(SwerveDriveConfiguration driveCfg, SwerveControllerConfiguration controllerCfg)
@@ -68,7 +80,23 @@ public class SwerveSubsystem extends SubsystemBase {
   {
     return swerveDrive.swerveController;
   }
+
+  public ChassisSpeeds getFieldVelocity(){
+    return swerveDrive.getFieldVelocity();
+  }
   
+  public ChassisSpeeds getRobotVelocity(){
+    return swerveDrive.getFieldVelocity();
+  }
+
+  public Pose2d getPose(){
+    return swerveDrive.getPose();
+  }
+
+  public SwerveDriveConfiguration getSwerveDriveConfiguration(){
+    return swerveDrive.swerveDriveConfiguration;
+  }
+
   @Override
   public void periodic() {
   }
@@ -77,4 +105,3 @@ public class SwerveSubsystem extends SubsystemBase {
   public void simulationPeriodic() {
   }
 }
-*/
