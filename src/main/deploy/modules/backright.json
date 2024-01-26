@@ -6,12 +6,12 @@
     "absoluteEncoderOffset": -2,
     "drive": {
       "type": "talonfx",
-      "id": 7,
+      "id": 11,
       "canbus": "canivore"
     },
     "angle": {
       "type": "talonfx",
-      "id": 8,
+      "id": 12,
       "canbus": "canivore"
     },
     "conversionFactor": {
@@ -19,9 +19,9 @@
       "drive": 4
     },
     "encoder": {
-      "type": "none",
-      "id": 0,
-      "canbus": null
+      "type": "cancoder",
+      "id": 4,
+      "canbus": "canivore"
     },
     "inverted": {
       "drive": false,

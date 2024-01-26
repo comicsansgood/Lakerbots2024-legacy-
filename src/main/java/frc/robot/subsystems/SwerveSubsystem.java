@@ -20,13 +20,13 @@ import edu.wpi.first.math.util.Units;
 public class SwerveSubsystem extends SubsystemBase {
   private  SwerveDrive swerveDrive;
   
-  double maximumSpeed = Units.feetToMeters(4.5);
-  File swerveJsonDirectory = new File(Filesystem.getDeployDirectory(),"swerve");
+  double maximumSpeed = Units.feetToMeters(14.5);
+  //File swerveJsonDirectory = new File(Filesystem.getDeployDirectory(),"swerve");
 
   public SwerveSubsystem(File dir){
     
     try{
-      SwerveDrive swerveDrive = new SwerveParser(dir).createSwerveDrive(maximumSpeed);
+       swerveDrive = new SwerveParser(dir).createSwerveDrive(maximumSpeed);
     }catch(Exception e){
       throw new RuntimeException(e);
 
@@ -69,11 +69,11 @@ public class SwerveSubsystem extends SubsystemBase {
     return swerveDrive.getYaw();
   }
 
-  public ChassisSpeeds getTargetSpeeds(double xInput, double yInput, double headingX, double headingY)
+  public ChassisSpeeds getTargetSpeeds(double xInput, double yInput, double headingX)
   {
     xInput = Math.pow(xInput, 3);
     yInput = Math.pow(yInput, 3);
-    return swerveDrive.swerveController.getTargetSpeeds(xInput, yInput, headingX, headingY, getHeading().getRadians(), maximumSpeed);  
+    return swerveDrive.swerveController.getTargetSpeeds(xInput, yInput, headingX, getHeading().getRadians(), maximumSpeed);  
   }
 
   public SwerveController getSwerveController()
